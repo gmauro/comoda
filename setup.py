@@ -12,6 +12,9 @@ with open(os.path.join(here, 'VERSION')) as f:
 with open(os.path.join(here, 'requirements.txt')) as f:
     required = f.read().splitlines()
 
+with open(os.path.join(here, 'README.rst')) as f:
+    long_description = f.read()
+
 extra_files = [os.path.join(here, 'VERSION'),
                os.path.join(here, 'APPNAME'),
                ]
@@ -20,6 +23,7 @@ setup(
     name=__appname__,
     version=__version__,
     description='useful functions and classes',
+    long_description=long_description,
     author='Gianmauro Cuccuru',
     author_email='gmauro@gmail.com',
     zip_safe=True,
