@@ -12,4 +12,4 @@ clean:
 	rm -rf dist *.egg-info __pycache__ build
 
 test:
-	echo "test"
+	@echo "test"
