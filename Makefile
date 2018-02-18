@@ -1,4 +1,4 @@
-TARGETS=build clean
+TARGETS=build clean test
 
 all:
 	@echo "Try one of: ${TARGETS}"
@@ -10,3 +10,6 @@ clean:
 	python setup.py clean --all
 	find . -name '*.pyc' -delete
 	rm -rf dist *.egg-info __pycache__ build
+
+test:
+	echo "test"

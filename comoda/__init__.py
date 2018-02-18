@@ -55,7 +55,7 @@ def ensure_dir(path, force=False):
             raise
 
 
-def path_exists(path, force=True):
+def path_exists(path, force=False):
     def missing(p, f):
         if f:
             print("path - {} - doesn't exists".format(p))
@@ -64,4 +64,3 @@ def path_exists(path, force=True):
 
     return True if os.path.exists(os.path.expanduser(path)) else missing(path,
                                                                          force)
-
