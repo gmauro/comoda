@@ -13,3 +13,7 @@ clean:
 
 test:
 	@echo "test"
+
+deploy: clean build
+	twine upload dist/*
+
