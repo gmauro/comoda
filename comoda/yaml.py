@@ -15,6 +15,10 @@ class ObjectView:
     def __init__(self, d):
         self.__dict__ = d
 
+    @property
+    def keys(self):
+        return [k for k, v in self.__dict__.items()]
+
 
 class DetailsFromYamlFile:
     """
