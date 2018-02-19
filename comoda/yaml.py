@@ -11,6 +11,11 @@ def load(filename):
     return conf
 
 
+class ObjectView:
+    def __init__(self, d):
+        self.__dict__ = d
+
+
 class DetailsFromYamlFile:
     """
     Retrieve details from a yaml file
@@ -23,9 +28,9 @@ class DetailsFromYamlFile:
             self.logger.critical('{} not exists'.format(yaml_file))
             sys.exit()
 
-    def get_section(self, section_label):
+    def section(self, section_label):
         if self.is_section_present(section_label):
-            return self.conf[section_label]
+            return ObjectView(self.conf[section_label])
         else:
             self.logger.warning('section {} not found'.format(section_label))
             return ''
