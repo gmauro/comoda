@@ -27,5 +27,5 @@ deploy:
     secure: j2XhBD7Z+vcrP+jletr1jKtdsISQ5l1LpIJAmDURIwEHVrejX/DTrB1eFhdRGqHSSpP40Xhliw9k7E1NCiyGmO/x/2SApZ1Lzos+LU1Qg6TDFZZDct89ViysOh5sfRoJB/oApAeT9s8ow02D025Dw0kcefNWK3XjvTaj+4wJWn7G327zM+s/on6ai4XfgeFo76A1SOGs1JNaZqNmnOKH6i4UcH/WXxJr5tFTAHh1Qns0/OEw9dvdh58+EpMxNkrecz6yBDF/Ml7qTCWR8iE6cf02rAQ6JCDOT4slrxI7v9GERaIvxZSEMV9+bAMj+2kFhy7E8rFT7856oOVUQHpWMFsCyyuBL+vQPuZxrS2WwhKlBN2rPEGFHimawmRDynh3gcUBakHpstf+QQ7HoFY6uWa/Rv3gGgScJTF0SzU/i+fQk8eJGO6Mn0uBJxghUTosk/8FTirF5BvOgya8ePYUE1CW0faikIP5sa1JsmrqaL2kh3ut8d7SOdK3TJmsMSy3pEUYNx71OeSG2v2pqFsVxadWcpquH1eyDfxwaJxO8K4KpDIJLPyS3Wz1sQsoYKiBWhqrUM3MlcwNBf0RknwrEzbA1U2NcfI0sflm3C82QZf8GbtBLVYSJ+LyJvxIHsFug7lypGyZD9isClqnzxsowbBVQkKcEh2rMyzvKkIhaf4=
   on:
     tags: true
-    distributions: sdist bdist_wheel
+    distributions: "sdist bdist_wheel"
     repo: gmauro/comoda
