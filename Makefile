@@ -3,7 +3,8 @@ TARGETS=build clean deploy test
 all:
 	@echo "Try one of: ${TARGETS}"
 
-build:
+build:  clean
+	python setup.py sdist
 	python setup.py bdist_wheel --universal
 
 clean:
@@ -11,7 +12,7 @@ clean:
 	find . -name '*.pyc' -delete
 	rm -rf dist *.egg-info __pycache__ build
 
-deploy: clean build
+deploy: build
 	twine upload dist/*
 
 test:
