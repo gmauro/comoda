@@ -15,6 +15,9 @@ clean:
 deploy: build
 	twine upload dist/*
 
+tag:
+	git tag v$(<VERSION)
+
 test:
 	@echo "test"
 
