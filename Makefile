@@ -1,5 +1,5 @@
 TARGETS=build clean deploy test
-
+VERSION=`cat VERSION`
 all:
 	@echo "Try one of: ${TARGETS}"
 
@@ -16,7 +16,7 @@ deploy: build
 	twine upload dist/*
 
 tag:
-	git tag v$(<VERSION)
+	git tag v${VERSION}
 
 test:
 	@echo "test"
