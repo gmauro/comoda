@@ -32,7 +32,6 @@ setup(
     packages=find_packages(exclude=('tests',)),
     keywords='utilities',
     install_requires=required,
-    include_package_data=True,
     package_data={'': extra_files},
     classifiers=[
         "Development Status :: 5 - Production/Stable",
