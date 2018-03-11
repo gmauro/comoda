@@ -1,7 +1,8 @@
 import os
 import sys
 from ruamel.yaml import YAML
-import comoda
+
+from .__init__ import a_logger
 
 
 def load(filename):
@@ -25,7 +26,7 @@ class DetailsFromYamlFile:
     Retrieve details from a yaml file
     """
     def __init__(self, yaml_file, loglevel='INFO'):
-        self.logger = comoda.a_logger(self.__class__.__name__, level=loglevel)
+        self.logger = a_logger(self.__class__.__name__, level=loglevel)
         if os.path.isfile(yaml_file):
             self.conf = load(yaml_file)
         else:

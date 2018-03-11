@@ -1,4 +1,4 @@
-TARGETS=build clean test
+TARGETS=build clean deploy test
 
 all:
 	@echo "Try one of: ${TARGETS}"
@@ -11,9 +11,11 @@ clean:
 	find . -name '*.pyc' -delete
 	rm -rf dist *.egg-info __pycache__ build
 
+deploy: clean build
+	twine upload dist/*
+
 test:
 	@echo "test"
 
-deploy: clean build
-	twine upload dist/*
+
 
