@@ -1,6 +1,6 @@
 Comoda
 ======
-a bunch of useful functions and classes
+a bunch of useful functions and classes  
 |build|
 
 Installation
