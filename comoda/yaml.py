@@ -6,9 +6,16 @@ from .__init__ import a_logger
 
 
 def load(filename):
+    """
+    Load a yaml file into a dictionary if exists, otherwise return an empty one
+    :param filename: path tot the file
+    :return: dictionary
+    """
     yaml = YAML()
-    with open(filename) as fn:
-        conf = yaml.load(fn)
+    conf = dict()
+    if os.path.isfile(filename):
+        with open(filename) as fn:
+            conf = yaml.load(fn)
     return conf
 
 
