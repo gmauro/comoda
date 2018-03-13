@@ -56,14 +56,16 @@ def ensure_dir(path, force=False):
             raise
 
 
-def path_exists(path, force=False):
-    def missing(p, f):
+def path_exists(path, logger=None, force=False):
+    def missing(p, l, f):
         if f:
-            print("path - {} - doesn't exists".format(p))
+            msg = "path - {} - doesn't exists".format(p)
+            logger.error(msg) if l else print(msg)
             sys.exit()
         return False
 
     return True if os.path.exists(os.path.expanduser(path)) else missing(path,
+                                                                         logger,
                                                                          force)
 
 
