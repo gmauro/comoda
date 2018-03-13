@@ -1,6 +1,7 @@
 import logging
 import os
 import shutil
+import subprocess
 import sys
 
 
@@ -64,3 +65,19 @@ def path_exists(path, force=False):
 
     return True if os.path.exists(os.path.expanduser(path)) else missing(path,
                                                                          force)
+
+
+# https://stackoverflow.com/questions/11210104/check-if-a-program-exists-from-a-python-script/11210902#11210902
+def is_tool_available(name):
+    """
+    Check if a program exists
+    :param name: label of the tool to search
+    :return: boolean
+    """
+    try:
+        devnull = open(os.devnull, 'w')
+        subprocess.Popen([name], stdout=devnull, stderr=devnull).communicate()
+    except OSError as e:
+        if e.errno == os.errno.ENOENT:
+            return False
+    return True
