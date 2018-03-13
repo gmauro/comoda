@@ -60,7 +60,10 @@ def path_exists(path, logger=None, force=False):
     def missing(p, l, f):
         if f:
             msg = "path - {} - doesn't exists".format(p)
-            logger.error(msg) if l else print(msg)
+            if l:
+                logger.error(msg)
+            else:
+                print(msg)
             sys.exit()
         return False
 
