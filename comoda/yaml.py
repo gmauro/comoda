@@ -5,6 +5,13 @@ from ruamel.yaml import YAML
 from .__init__ import a_logger
 
 
+def dump(data, filename):
+    yaml = YAML()
+    yaml.default_flow_style = False
+    with open(filename, 'w')as fn:
+        yaml.dump(data, fn)
+
+
 def load(filename):
     """
     Load a yaml file into a dictionary if exists, otherwise return an empty one
