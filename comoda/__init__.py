@@ -28,6 +28,18 @@ def a_logger(name, level="WARNING", filename=None, mode="a"):
     return logger
 
 
+# from http://stackoverflow.com/questions/273192/how-to-check-if-a-directory-
+# exists-and-create-it-if-necessary/5032238#5032238
+def ensure_dir(path, force=False):
+    try:
+        if force and os.path.exists(path):
+            shutil.rmtree(path)
+        os.makedirs(path)
+    except OSError:
+        if not os.path.isdir(path):
+            raise
+
+
 # from http://stackoverflow.com/questions/19044096/how-to-import-a-submodule-in-
 # python-without-exec
 def import_from(mod_name, var_name, error_msg=None):
@@ -44,16 +56,31 @@ def import_from(mod_name, var_name, error_msg=None):
     return var
 
 
-# from http://stackoverflow.com/questions/273192/how-to-check-if-a-directory-
-# exists-and-create-it-if-necessary/5032238#5032238
-def ensure_dir(path, force=False):
+# https://stackoverflow.com/questions/11210104/check-if-a-program-exists-from-a-python-script/11210902#11210902
+def is_tool_available(name):
+    """
+    Check if a program exists
+    :param name: label of the tool to search
+    :return: boolean
+    """
     try:
-        if force and os.path.exists(path):
-            shutil.rmtree(path)
-        os.makedirs(path)
-    except OSError:
-        if not os.path.isdir(path):
-            raise
+        devnull = open(os.devnull, 'w')
+        subprocess.Popen([name], stdout=devnull, stderr=devnull).communicate()
+    except OSError as e:
+        if e.errno == os.errno.ENOENT:
+            return False
+    return True
+
+
+def path_is_empty(path):
+    """
+    Return true if path exists and is empty. False if doesn't exists or
+    exists but is not empty
+    :param path: path
+    :return: boolean
+    """
+    return not os.listdir(path) if os.path.exists(os.path.expanduser(
+        path)) else False
 
 
 def path_exists(path, logger=None, force=False):
@@ -72,17 +99,3 @@ def path_exists(path, logger=None, force=False):
                                                                          force)
 
 
-# https://stackoverflow.com/questions/11210104/check-if-a-program-exists-from-a-python-script/11210902#11210902
-def is_tool_available(name):
-    """
-    Check if a program exists
-    :param name: label of the tool to search
-    :return: boolean
-    """
-    try:
-        devnull = open(os.devnull, 'w')
-        subprocess.Popen([name], stdout=devnull, stderr=devnull).communicate()
-    except OSError as e:
-        if e.errno == os.errno.ENOENT:
-            return False
-    return True
