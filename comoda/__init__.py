@@ -99,3 +99,21 @@ def path_exists(path, logger=None, force=False):
                                                                          force)
 
 
+def search_binary_path(name, path=None, exts=('',)):
+    """ http://code.activestate.com/recipes/52224/
+    Search PATH for a binary.
+    Args:
+    name: the filename to search for
+    path: the optional path string (default: os.environ['PATH')
+    exts: optional list/tuple of extensions to try (default: ('',))
+
+    Returns:
+    The abspath to the binary or None if not found.
+    """
+    path = path or os.getenv('PATH')
+    for folder in path.split(os.path.pathsep):
+        for ext in exts:
+            binpath = os.path.join(folder, name) + ext
+            if os.path.exists(binpath):
+                return os.path.abspath(binpath)
+    return None
