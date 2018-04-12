@@ -15,11 +15,6 @@ with open(os.path.join(here, 'requirements.txt')) as f:
 with open(os.path.join(here, 'README.rst')) as f:
     long_description = f.read()
 
-extra_files = [os.path.join(here, 'APPNAME'),
-               os.path.join(here, 'requirements.txt'),
-               os.path.join(here, 'README.rst'),
-               os.path.join(here, 'VERSION'),
-               ]
 
 setup(
     name=__appname__,
@@ -34,7 +29,6 @@ setup(
     packages=find_packages(exclude=('tests',)),
     keywords='utilities',
     install_requires=required,
-    package_data={'': extra_files},
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         'Intended Audience :: Developers',
