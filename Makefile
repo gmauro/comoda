@@ -1,5 +1,5 @@
 TARGETS=build clean deploy test
-VERSION=`cat VERSION`
+VERSION=`cat comoda/VERSION`
 all:
 	@echo "Try one of: ${TARGETS}"
 

@@ -3,10 +3,10 @@ from setuptools import setup, find_packages
 
 here = os.path.abspath(os.path.dirname(__file__))
 
-with open(os.path.join(here, 'APPNAME')) as f:
+with open(os.path.join(here, 'comoda', 'APPNAME')) as f:
     __appname__ = f.read().strip()
 
-with open(os.path.join(here, 'VERSION')) as f:
+with open(os.path.join(here, 'comoda', 'VERSION')) as f:
     __version__ = f.read().strip()
 
 with open(os.path.join(here, 'requirements.txt')) as f:
@@ -15,6 +15,10 @@ with open(os.path.join(here, 'requirements.txt')) as f:
 with open(os.path.join(here, 'README.rst')) as f:
     long_description = f.read()
 
+extra_files = [os.path.join(here, 'requirements.txt'),
+               os.path.join(here, 'comoda', 'VERSION'),
+               os.path.join(here, 'comoda', 'APPNAME')
+               ]
 
 setup(
     name=__appname__,
@@ -27,6 +31,7 @@ setup(
     url='http://github.com/gmauro/comoda',
     license='MIT',
     packages=find_packages(exclude=('tests',)),
+    package_data={'': extra_files},
     keywords='utilities',
     install_requires=required,
     classifiers=[
