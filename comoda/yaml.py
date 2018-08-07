@@ -5,10 +5,10 @@ from ruamel.yaml import YAML
 from .__init__ import a_logger
 
 
-def dump(data, filename):
+def dump(data, filename, mode='w'):
     yaml = YAML()
     yaml.default_flow_style = False
-    with open(filename, 'w')as fn:
+    with open(filename, mode)as fn:
         yaml.dump(data, fn)
 
 
