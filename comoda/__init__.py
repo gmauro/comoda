@@ -9,11 +9,37 @@ from logstash_async.handler import AsynchronousLogstashHandler
 LOG_LEVELS = ['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL']
 
 
-def a_logger(name, level="WARNING", filename=None, mode="a", host=None, port=5000):
+def a_formatter():
     log_format = '%(asctime)s|%(levelname)-8s|%(name)s |%(message)s'
     log_datefmt = '%Y-%m-%d %H:%M:%S'
-    logger = logging.getLogger(name)
     formatter = logging.Formatter(log_format, datefmt=log_datefmt)
+    return formatter
+
+
+def a_handler(filename=None, mode="a", formatter=None):
+    if filename:
+        handler = logging.FileHandler(filename, mode=mode)
+    else:
+        handler = logging.StreamHandler()
+
+    formatter = formatter if formatter else a_formatter()
+    handler.setFormatter(formatter)
+
+    return handler
+
+
+def a_async_handler(host='0.0.0.0', port=5000, formatter=None):
+    async_handler = AsynchronousLogstashHandler(host, port, database_path=None)
+
+    formatter = formatter if formatter else a_formatter()
+    async_handler.setFormatter(formatter)
+
+    return async_handler
+
+
+def a_logger(name, level="WARNING", filename=None, mode="a", host=None, port=5000):
+    formatter = a_formatter()
+    logger = logging.getLogger(name)
 
     if not isinstance(level, int):
         try:
@@ -23,16 +49,10 @@ def a_logger(name, level="WARNING", filename=None, mode="a", host=None, port=500
         logger.setLevel(level)
 
     if host and isinstance(port, int):
-        async_handler = AsynchronousLogstashHandler(host, port, database_path=None)
-        async_handler.setFormatter(formatter)
+        async_handler = a_async_handler(host, port, formatter)
         logger.addHandler(async_handler)
 
-    if filename:
-        handler = logging.FileHandler(filename, mode=mode)
-    else:
-        handler = logging.StreamHandler()
-
-    handler.setFormatter(formatter)
+    handler = a_handler(filename, mode, formatter)
     logger.addHandler(handler)
     return logger
 
