@@ -9,11 +9,11 @@ from logstash_async.handler import AsynchronousLogstashHandler
 LOG_LEVELS = ['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL']
 
 
-def a_formatter():
-    log_format = '%(asctime)s|%(levelname)-8s|%(name)s |%(message)s'
-    log_datefmt = '%Y-%m-%d %H:%M:%S'
-    formatter = logging.Formatter(log_format, datefmt=log_datefmt)
-    return formatter
+def a_formatter(**kwargs):
+    log_format = kwargs.get("log_format",
+                            '%(asctime)s|%(levelname)-8s|%(name)s |%(message)s')
+    log_datefmt = kwargs.get("log_datefmt", '%Y-%m-%d %H:%M:%S')
+    return logging.Formatter(log_format, datefmt=log_datefmt)
 
 
 def a_handler(filename=None, mode="a", formatter=None):
