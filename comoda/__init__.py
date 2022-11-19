@@ -37,8 +37,19 @@ def a_async_handler(host='0.0.0.0', port=5000, formatter=None):
     return async_handler
 
 
-def a_logger(name, level="WARNING", filename=None, mode="a", host=None, port=5000):
+def a_logger(name, log_format=None, log_datefmt=None, level="WARNING",
+             filename=None, mode="a", host=None, port=5000):
     formatter = a_formatter()
+    if log_format is not None:
+        if log_datefmt is not None:
+            formatter = a_formatter(log_format=log_format,
+                                    log_datefmt=log_datefmt)
+        else:
+            formatter = a_formatter(log_format=log_format)
+    else:
+        if log_datefmt is not None:
+            formatter = a_formatter(log_datefmt=log_datefmt)
+
     logger = logging.getLogger(name)
 
     if not isinstance(level, int):
